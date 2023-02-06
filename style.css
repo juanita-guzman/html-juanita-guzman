@@ -1,0 +1,6 @@
+.cuadricula  {
+  display:flex;
+  flex-wrap: :wrap;
+  width: 488px;
+  height: 500px;
+}
