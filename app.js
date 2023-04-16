@@ -1,18 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
-  //----------------- lecture_02 ----------------------------------//
   const cardAdj = [
-    { name: "1.png", img: "images/1.png" },
-    { name: "2.png", img: "images/2.png" },
-    { name: "3.png", img: "images/3.png" },
-    { name: "4.png", img: "images/4.png" },
-    { name: "5.png", img: "images/5.png" },
-    { name: "6.png", img: "images/6.png" },
-    { name: "1.png", img: "images/1.png" },
-    { name: "2.png", img: "images/2.png" },
-    { name: "3.png", img: "images/3.png" },
-    { name: "4.png", img: "images/4.png" },
-    { name: "5.png", img: "images/5.png" },
-    { name: "6.png", img: "images/6.png" }
+    {
+      name: "1",
+      img: "img/1.jpg"
+    },
+    {
+      name: "2",
+      img: "img/2.jpg"
+    },
+    {
+      name: "3",
+      img: "img/3.jpg"
+    },
+    {
+      name: "4",
+      img: "img/4.jpg"
+    },
+    {
+      name: "5",
+      img: "img/5.jpg"
+    },
+    {
+      name: "6",
+      img: "img/6.jpg"
+    },
+    {
+      name: "7",
+      img: "img/7.jpg"
+    },
+    {
+      name: "8",
+      img: "img/8.jpg"
+    },
+    {
+      name: "1",
+      img: "img/1.jpg"
+    },
+    {
+      name: "2",
+      img: "img/2.jpg"
+    },
+    {
+      name: "3",
+      img: "img/3.jpg"
+    },
+    {
+      name: "4",
+      img: "img/4.jpg"
+    },
+    {
+      name: "5",
+      img: "img/5.jpg"
+    },
+    {
+      name: "6",
+      img: "img/6.jpg"
+    },
+    {
+      name: "7",
+      img: "img/7.jpg"
+    },
+    {
+      name: "8",
+      img: "img/8.jpg"
+    }
   ];
 
   const cuadricula = document.querySelector(".cuadricula");
@@ -21,22 +72,46 @@ document.addEventListener("DOMContentLoaded", () => {
   var cartasEscogidasId = [];
   var cartasGanadas = [];
 
-  //----------------- lecture_03 ----------------------------------//
   function crearTablero() {
     for (let i = 0; i < cardAdj.length; i++) {
       var carta = document.createElement("img");
-
-      carta.setAttribute("src", "images/reverso.png");
-
+      carta.setAttribute("src", "img/reverso.png");
       carta.setAttribute("data-id", i);
-
       carta.addEventListener("click", voltearCarta);
-
       cuadricula.appendChild(carta);
     }
   }
+  function verificarPareja() {
+    var cards = document.querySelectorAll("img");
+    const opcionUnoId = cartasEscogidasId[0];
+    const opcionDosId = cartasEscogidasId[1];
 
-  //----------------- lecture_04 ----------------------------------//
+    if (opcionUnoId === opcionDosId) {
+      cards[opcionUnoId].setAttribute("src", "img/reverso.png");
+      cards[opcionDosId].setAttribute("src", "img/reverso.png");
+      alert("Diste click a la misma imagen!");
+    } else if (cartasEscogidas[0] === cartasEscogidas[1]) {
+      alert("¡Correcto!");
+      cards[opcionUnoId].setAttribute("src", "img/blank.png");
+      cards[opcionDosId].setAttribute("src", "img/blank.png");
+      cards[opcionUnoId].removeEventListener("click", voltearCarta);
+      cards[opcionDosId].removeEventListener("click", voltearCarta);
+      cartasGanadas.push(cartasEscogidas);
+    } else {
+      cards[opcionUnoId].setAttribute("src", "img/reverso.png");
+      cards[opcionDosId].setAttribute("src", "img/reverso.png");
+      alert("Intenta de nuevo!");
+    }
+
+    cartasEscogidas = [];
+    cartasEscogidasId = [];
+
+    resultado.textContent = cartasGanadas.Length;
+
+    if (cartasGanadas.Length - cardAdj.length / 2) {
+      resultado.textContent = "¡Felicidades, encontraste todos los pares!";
+    }
+  }
 
   function voltearCarta() {
     var cardId = this.getAttribute("data-id");
@@ -44,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartasEscogidasId.push(cardId);
     this.setAttribute("src", cardAdj[cardId].img);
     if (cartasEscogidas.length === 2) {
-      setTimeout(verificarPareja, 1000);
+      setTimeout(verificarPareja, 1500);
     }
   }
 
